@@ -1,0 +1,7 @@
+node_modules
+uploads
+dist
+Vue-Todolist/node_modules
+Vue-Todolist/dist
+Vue-Todolist/*.zip
+Vue-Todolist/todolist
