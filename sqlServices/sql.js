@@ -4,7 +4,7 @@ const config = {
     user: 'root',
     password: 'openway',
     port: 3306,
-    database: 'test'
+    database: 'cstore'
 }
 const pool = mysql.createPool(config);
 const exec = (sql, value) => {
@@ -18,10 +18,12 @@ const exec = (sql, value) => {
             connection.query(sql, value ? value : undefined, (err, result) => {
                 if (err) {
                     //操作失败
-                    reject(err)
+                    reject({
+                        code:0
+                    })
                 } else {
                     resolve({
-                        code: 0,
+                        code: 200,
                         data: result,
                         message: '操作成功'
                     })

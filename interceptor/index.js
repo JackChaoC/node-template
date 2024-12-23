@@ -12,8 +12,8 @@ const interceptor = function (req, res, next) {
         next()
     } else {
         res.send({
-            "code": 1, //未登录
-            "data": 0,
+            "code": 20001, //未登录
+            "data": null,
             "message": "访问成功，但是未登录"
         })
     }

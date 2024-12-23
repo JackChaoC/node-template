@@ -8,8 +8,6 @@ const interceptor = require('./interceptor/index.js');
 
 // 使用 cors 中间件
 const corsConfig = {
-    // origin: 'http://localhost:80', // 允许的前端域名
-    // origin: 'http://192.168.1.63:80', // 允许的前端域名
     credentials: true, // 允许发送凭证(cookie)
     optionsSuccessStatus: 200
 }
