@@ -12,31 +12,36 @@ Authorization.post('/login', async (req, res) => {
     try {
         let { user_email, user_password } = req.body
         // console.log(await bcrypt.hash(user_password, 10));
-        const result = await exec('SELECT * FROM USERS WHERE user_email=?', [user_email])
-        console.log(111111, result);
-        if (result.data.length > 0) {
-            console.log('????????');
+        const sqlResult = await exec('SELECT user_id,user_name,user_email,user_password FROM USERS WHERE user_email=?', [user_email])
+        if (sqlResult.data.length > 0) {
 
-            const { user_id, user_email, user_password: storedPasswordHash } = result.data[0];
-            const a = await bcrypt.hash(user_password, 10);
-            console.log(user_password, storedPasswordHash, a);
-
+            const { user_id, user_name, user_email, user_password: storedPasswordHash } = sqlResult.data[0];
             const isPasswordCorrect = await bcrypt.compare(user_password, storedPasswordHash)
-            // const isPasswordCorrect = true
-            console.log(2222222, isPasswordCorrect);
 
             if (isPasswordCorrect) {
-                result.data.code = 200
-                res.user = {
-                    user_email: user_email,
-                    user_id: user_id
+                const result = {
+                    code: 200,
+                    data: {
+                        user_id: user_id,
+                        user_name: user_name,
+                        user_email: user_email,
+                    },
+                    message: '登录成功'
                 }
                 req.session.loggedIn = true;
-                req.session.cookie.maxAge = 1000 * 60 * 60;
+                req.session.cookie.maxAge = 1000 * 60 * 60 * 24;
+                res.cookie('userInfo', JSON.stringify(result.data), {
+                    maxAge: 24 * 60 * 60 * 100000, // 1 天
+                    // httpOnly: true,
+                    secure: false, // 开发环境可设为 false；生产环境建议设为 true
+                    // sameSite: 'lax',
+                });
+                console.log(111111111111, result);
+
                 return res.send(result);
             } else {
                 res.send({
-                    code: 0,
+                    code: 401,
                     data: null,
                     message: '密码错误'
                 });
@@ -44,7 +49,7 @@ Authorization.post('/login', async (req, res) => {
         } else {
             console.log('3333');
             res.send({
-                code: 0,
+                code: 401,
                 data: null,
                 message: '用户不存在'
             });

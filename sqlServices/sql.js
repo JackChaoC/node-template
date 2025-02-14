@@ -14,18 +14,19 @@ const exec = (sql, value) => {
             if (err) {
                 reject(err)
             }
-            console.log('sql param:', value);
+
             connection.query(sql, value ? value : undefined, (err, result) => {
+                console.log('sql:', sql);
+                console.log('sql param:', value);
                 if (err) {
                     //操作失败
-                    reject({
-                        code:0
-                    })
+                    console.log('err:' + err);
+                    reject(err)
                 } else {
                     resolve({
                         code: 200,
                         data: result,
-                        message: '操作成功'
+                        message: 'sql操作成功'
                     })
                 }
                 connection.release() // 释放连接
