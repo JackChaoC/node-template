@@ -10,6 +10,7 @@ const sequelize = new Sequelize('cstore', 'root', 'openway', {
         acquire: 30000,
         idle: 10000,
     },
+    logging: console.log, 
 });
 
 // USERS 表
@@ -68,7 +69,6 @@ const DictsCategory = sequelize.define('DictsCategory', {
     },
     category_name: {
         type: DataTypes.STRING(50),
-        unique: true,
     },
 }, {
     tableName: 'DICTS_CATEGORY',

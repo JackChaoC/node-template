@@ -15,8 +15,14 @@ const storage = multer.diskStorage({
         cb(null, Date.now() + '-' + iconv.decode(Buffer.from(file.originalname, 'latin1'), 'utf-8')); // 给文件名添加时间戳
     },
 });
+const options = {
+    storage,
+    limits: {
+        fileSize: 50 * 1024 * 1024, // 限制文件大小为 5MB
+    }
+}
 
-const upload = multer({ storage: storage });
+const upload = multer(options);
 let number = 0
 // 文件上传路由
 uploadRouter.post('/', upload.single('file'), async (req, res) => {

@@ -20,7 +20,7 @@ const interceptor = function (req, res, next) {
     // }
 
 
-    console.log('全局 body->', req.body)
+    console.log(`全局 body-> ${JSON.stringify(req.body)}, path-> ${req.path}`)
     next()
 
 }

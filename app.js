@@ -3,7 +3,6 @@ const session = require('express-session');
 const cors = require('cors')
 const path = require('path');
 const app = express();
-const { sequelize } = require('./sqlServices/sequelize.js');
 
 const interceptor = require('./interceptor/index.js');
 
