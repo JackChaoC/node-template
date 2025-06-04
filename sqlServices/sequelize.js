@@ -256,7 +256,7 @@ async function initDatabase() {
     await sequelize.sync({ force: false, alter: true });
     console.log("数据库同步成功");
 }
-// initDatabase().catch(console.error);
+initDatabase().catch(console.error);
 
 module.exports = {
     Users,
@@ -264,6 +264,5 @@ module.exports = {
     DictsCategory,
     Goods,
     Orders,
-    Files,
-    sequelize
+    Files
 }

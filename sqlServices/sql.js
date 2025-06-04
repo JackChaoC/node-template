@@ -1,4 +1,4 @@
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const config = {
     host: 'localhost',
     user: 'root',
@@ -14,7 +14,6 @@ const exec = (sql, value) => {
             if (err) {
                 reject(err)
             }
-
             connection.query(sql, value ? value : undefined, (err, result) => {
                 console.log('sql:', sql);
                 console.log('sql param:', value);

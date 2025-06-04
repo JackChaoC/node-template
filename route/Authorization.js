@@ -2,6 +2,7 @@ const express = require('express');
 const exec = require('../sqlServices/sql.js')
 const Authorization = express.Router();
 const bcrypt = require('bcrypt');
+const { generateToken } = require('../utils/auth.js')
 /**
  * 1.登录
  * @param {user_emial : String} 
@@ -28,15 +29,9 @@ Authorization.post('/login', async (req, res) => {
                     },
                     message: '登录成功'
                 }
-                req.session.loggedIn = true;
-                req.session.cookie.maxAge = 1000 * 60 * 60 * 24;
-                res.cookie('userInfo', JSON.stringify(result.data), {
-                    maxAge: 24 * 60 * 60 * 100000, // 1 天
-                    // httpOnly: true,
-                    secure: false, // 开发环境可设为 false；生产环境建议设为 true
-                    // sameSite: 'lax',
-                });
-                console.log(111111111111, result);
+                //auth
+                res.cookie('token', generateToken({ user_id, user_name, user_email }))
+                console.log('login result:', result);
 
                 return res.send(result);
             } else {
