@@ -1,3 +1,12 @@
+const {
+    Users,
+    Dicts,
+    DictsCategory,
+    Goods,
+    Orders,
+    Files
+} = require('../sqlServices/sequelize.js')
+
 const doAutoRPC = (router, RPCconfig) => {
     function doEval(str, modelName, rpcName, self) {
         eval(str)

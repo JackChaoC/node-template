@@ -1,7 +1,7 @@
 const express = require('express');
 const exec = require('../sqlServices/sql.js')
 const Authorization = express.Router();
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const { generateToken } = require('../utils/auth.js')
 /**
  * 1.登录

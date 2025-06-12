@@ -2,11 +2,24 @@ const mysql = require('mysql2');
 const config = {
     host: 'localhost',
     user: 'root',
-    password: 'openway',
+    password: '123456',
     port: 3306,
     database: 'cstore'
 }
 const pool = mysql.createPool(config);
+// 测试连接是否成功
+pool.getConnection((err, connection) => {
+    if (err) {
+        setTimeout(() => {
+            console.error('❌ 数据库连接失败:', err.message);
+        }, 1000)
+    } else {
+        setTimeout(() => {
+            console.log('✅ 数据库连接成功');
+        }, 1000)
+        connection.release();
+    }
+});
 const exec = (sql, value) => {
     return new Promise((resolve, reject) => {
         // 连接数据库

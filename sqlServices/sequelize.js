@@ -1,5 +1,5 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = new Sequelize('cstore', 'root', 'openway', {
+const sequelize = new Sequelize('cstore', 'root', '123456', {
     dialect: 'mysql',       // 这里可以改成任意一种关系型数据库
     host: 'localhost',      // 数据库服务器
     timezone: '+08:00',     // 这里是东八区，默认为0时区

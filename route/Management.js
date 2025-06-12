@@ -1,8 +1,7 @@
 const path = require('path');
 const express = require('express');
 const Management = express.Router();
-const { Dicts } = require('../sqlServices/sequelize.js')
-const { DictsCategory } = require('../sqlServices/sequelize.js');
+const { Dicts, DictsCategory } = require('../sqlServices/sequelize.js')
 const { doAutoRPC } = require('../utils/rpc.js')
 
 const RPCconfig = [{
